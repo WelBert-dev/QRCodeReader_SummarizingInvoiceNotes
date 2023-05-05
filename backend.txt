@@ -58,6 +58,7 @@ Referência video (inglês): https://www.youtube.com/watch?v=2Hq1wc1AzCY
 -------------------------------------------------------------------------------
 3o - Implementando a função para o método HTTP Post: examples/webui-rest
 - Ja existe template pronto para API REST: https://mongoose.ws/documentation/tutorials/webui-rest/
+- Como trabalhar com Json no mongoose: https://mongoose.ws/documentation/#using-json
 
     - Starting/Running:
         $ cd examples/webui-rest
