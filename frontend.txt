@@ -4,8 +4,12 @@ Modulo QR Reader: react-qr-Reader
 
 -------------------------------------------------------------------------------
 - DEPENDÊNCIAS:
+    - React QR Reader: https://www.npmjs.com/package/react-qr-reader
+        $ npm i react-qr-reader
 
 
 1o - Gerando o Tamplete inicial do projeto frontend: 
-    $ npm create-react-app
+    $ npm create-react-app@5.0.1
+
+
 
