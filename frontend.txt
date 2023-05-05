@@ -1,2 +1,12 @@
 Modulo QR Reader: react-qr-Reader
     https://www.youtube.com/watch?v=_L7MZWO-Xgs : 35:00
+
+
+-------------------------------------------------------------------------------
+- DEPENDÊNCIAS:
+
+
+1o - Gerando o Tamplete inicial do projeto frontend: https://create.t3.gg/
+    $ npm create t3-app@latest
+
+    
