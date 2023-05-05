@@ -1,0 +1,77 @@
+
+Fonte: https://mongoose.ws/documentation/
+Referência video (inglês): https://www.youtube.com/watch?v=2Hq1wc1AzCY
+
+-------------------------------------------------------------------------------
+
+1o - Primeiro foi necessário instalar a biblioteca para subir servidor web: Mongoose;
+    1o - Não existe no repositório Ubuntu mais recente, então doi necessário baixar 
+    direto da fonte e instalar manualmente: https://github.com/cesanta/mongoose/releases/tag/7.9
+        - Site Oficial: https://mongoose.ws/
+
+    2o - Após descompactado, entramos na pasta gerada e executamos:
+        - $ sudo make install (Instala as dependencias)
+        - $ sudo make linux-libs 
+        - $ make 
+
+    3o - Aqui o servidor ja fica running, para testar: http://0.0.0.0:8000
+
+
+-------------------------------------------------------------------------------
+2o - Entendendo os arquivos:
+
+    - Existem exemplos de implementações para http-server em: /webserver/examples/http-server
+    - O Arquivo que devemos configurar é o Makefile, que é o arquivo que possuem os parâmetros
+    do make: PORÉM esse exemplo suporta apenas Windows!
+    ---------------------------------------------------------------------------
+    [Makefile] content:
+
+    PROG ?= example
+    ROOT ?= $(realpath $(CURDIR)/../..)
+    DEFS ?= -DMG_ENABLE_LINES=1 -DMG_ENABLE_IPV6=1 -DMG_ENABLE_SSI=1 -DMG_HTTP_DIRLIST_TIME=1
+    CFLAGS ?= -I../.. -W -Wall $(DEFS) $(EXTRA)
+    VCFLAGS = /nologo /W3 /O2 /I../.. $(DEFS) $(EXTRA) /link /incremental:no /machine:IX86
+    VC98 = docker run -it --rm -e Tmp=. -v $(ROOT):$(ROOT) -w $(CURDIR) mdashnet/vc98
+
+    all: $(PROG)
+        $(RUN) ./$(PROG) $(ARGS)
+
+    $(PROG): main.c Makefile
+        $(CC) ../../mongoose.c main.c -I../.. $(CFLAGS) -o $@
+
+    mongoose.exe: main.c
+        $(VC98) wine cl ../../mongoose.c main.c $(VCFLAGS) ws2_32.lib /out:$@
+
+    mingw:
+        gcc ../../mongoose.c main.c -I../.. -W -Wall $(DEFS) -D_POSIX_C_SOURCE=200000L -lws2_32 -o mongoose.exe
+
+    clean:
+        rm -rf $(PROG) *.o *.dSYM *.gcov *.gcno *.gcda *.obj *.exe *.ilk *.pdb mongoose mongoose_* mongoose.*
+
+    ---------------------------------------------------------------------------
+    - Quando executamos $ make mingw o comando que será executado é o:
+        $ gcc ../../mongoose.c main.c -I../.. -W -Wall $(DEFS) -D_POSIX_C_SOURCE=200000L -lws2_32 -o mongoose.exe
+    
+    - No meu caso eu estou utilizando Linux, e esse exemplo não suporta diferente do Makefile principal.
+
+
+-------------------------------------------------------------------------------
+3o - Implementando a função para o método HTTP Post: examples/webui-rest
+- Ja existe template pronto para API REST: https://mongoose.ws/documentation/tutorials/webui-rest/
+
+    - Starting/Running:
+        $ cd examples/webui-rest
+        $ make clean all
+
+- index.html do front: examples/webui-rest/web-root/index.html
+
+- Implementações dos metodos GET e POST: examples/webui-rest/main.c
+
+-------------------------------------------------------------------------------
+
+
+    
+
+
+
+

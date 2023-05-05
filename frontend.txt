@@ -1,0 +1,2 @@
+Modulo QR Reader: react-qr-Reader
+    https://www.youtube.com/watch?v=_L7MZWO-Xgs : 35:00
