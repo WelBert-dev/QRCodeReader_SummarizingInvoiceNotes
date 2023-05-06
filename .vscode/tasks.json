@@ -10,7 +10,8 @@
                 "${file}",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}",
-                "-lqrencode"
+                "-lqrencode",
+                "-lpng"
             ],
             "options": {
                 "cwd": "${fileDirname}"

@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "qrencode.h": "c"
+        "qrencode.h": "c",
+        "typeinfo": "c"
     }
 }
