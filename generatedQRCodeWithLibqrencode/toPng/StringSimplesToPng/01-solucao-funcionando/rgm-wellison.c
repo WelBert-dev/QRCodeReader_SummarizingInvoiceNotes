@@ -67,7 +67,10 @@ void write_png_file(char* filename, int width, int height, unsigned char* image_
 
 int main() {
     // Define a mensagem a ser codificada no QR code
-    char* message = "hello word!";
+    char* message = "{\"name\":\"Wellison da Cruz Bertelli\", "
+            "\"cpf\":\"123.456.789-10\", "
+            "\"curso\":\"Análise e Desenvolvimento de Sistemas\", "
+            "\"prontuario\":\"5533482004\"}";
 
     QRcode* qrcode = QRcode_encodeString(message, 0, QR_ECLEVEL_M, QR_MODE_8, 1);
 

@@ -83,7 +83,7 @@ int main() {
     }
 
     // Write image data to file
-    write_png_file("rgm-wellison.png", qrcode->width, qrcode->width, image_data);
+    write_png_file("hello.png", qrcode->width, qrcode->width, image_data);
 
     // Clean up
     QRcode_free(qrcode);

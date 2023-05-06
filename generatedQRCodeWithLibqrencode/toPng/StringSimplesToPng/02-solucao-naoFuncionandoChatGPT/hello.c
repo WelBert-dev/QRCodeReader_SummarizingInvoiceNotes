@@ -66,15 +66,15 @@ void write_png_file(char* filename, int width, int height, unsigned char* image_
 
 
 int main() {
-    // Define a mensagem a ser codificada no QR code
+    // Defina a mensagem a ser codificada no QR code
     char* message = "hello word!";
 
     QRcode* qrcode = QRcode_encodeString(message, 0, QR_ECLEVEL_M, QR_MODE_8, 1);
 
-    // Allocate buffer for image data
+    // Aloque o buffer para os dados de imagem
     unsigned char* image_data = (unsigned char*)malloc(qrcode->width * qrcode->width * sizeof(unsigned char));
 
-    // Convert QRcode data to grayscale image data
+    // Converta os dados do QRcode para dados de imagem em tons de cinza
     int i, j;
     for (i = 0; i < qrcode->width; i++) {
         for (j = 0; j < qrcode->width; j++) {
@@ -82,10 +82,10 @@ int main() {
         }
     }
 
-    // Write image data to file
-    write_png_file("rgm-wellison.png", qrcode->width, qrcode->width, image_data);
+    // Escreva os dados de imagem em um arquivo PNG
+    write_png_file("hello.png", qrcode->width, qrcode->width, image_data);
 
-    // Clean up
+    // Limpeza de memória
     QRcode_free(qrcode);
     free(image_data);
 
