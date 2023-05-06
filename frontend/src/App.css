@@ -5,3 +5,8 @@
 .App-header {
   background-color: #282c34;
 }
+
+.main-render--container {
+  width: 50vw;
+  height: 50vh;
+}

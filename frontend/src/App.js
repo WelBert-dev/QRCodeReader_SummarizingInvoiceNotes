@@ -1,17 +1,38 @@
+import React, { useState } from 'react';
+import { QrReader } from "react-qr-reader";
+
 import './App.css';
 
-function App() {
+
+const Render = (props) => {
+  const [data, setData] = useState('No result');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        ...
-      </header>
-      <main>
+    <>
+      <QrReader
+        onResult={(result, error) => {
+          if (!!result) {
+            setData(result?.text);
+            console.log(result.getText())
+          }
 
-      </main>
-      <footer>
+          if (!!error) {
+            console.info(error);
+          }
+        }}
+        constraints={{facingMode:"user"}}
+        style={{ width: '100%' }}
+      />
+      <p>{data}</p>
+    </>
+  );
+};
 
-      </footer>
+function App() {
+
+  return (
+    <div className="main-render--container">
+      <Render />
     </div>
   );
 }
