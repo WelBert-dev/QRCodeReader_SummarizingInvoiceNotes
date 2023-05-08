@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "qrencode.h": "c",
-        "typeinfo": "c"
+        "typeinfo": "c",
+        "png.h": "c"
     }
 }
