@@ -1,0 +1,143 @@
+header nav {
+    padding: .5rem;
+    position: fixed;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    opacity: 1;
+    gap: .8rem;
+    /* background: linear-gradient(to right, white 15%, #6a6767 85%); */
+    background-color: #226015;
+    border: 4px double black;
+    top: 0;
+}
+
+header nav a {
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: cursive;
+    border: 4px double white;
+    border-radius: 10%;
+    padding: .5rem;
+    box-shadow: .1rem .1rem .2rem black;
+    background: linear-gradient(to right, #252525e0 15%, #1b1b1bed 70%);
+    text-shadow: 0.15rem .09rem 0.009rem black;
+    transition: all ease .3s;
+    color: white;
+    text-decoration: none;
+}
+
+header nav a:visited {
+    color: #ffffff;
+}
+
+header nav a:hover {
+    box-shadow: .6rem .1rem .2rem black;
+    text-shadow: none;
+    transform: scale(1.05);
+    background: var(--main-color);
+    border-color: black;
+    color: black;
+}
+
+/* Mobile area */
+
+.nav-btn {
+    padding: 5px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: black;
+    display: none;
+    opacity: 0;
+    font-size: 2rem;
+    position: fixed;
+    z-index: 2;
+    width: 100vw;
+    text-align: left;
+}
+
+@media (max-width: 810px)
+{
+    .nav-btn {
+        display: block;
+        opacity: 1;
+    }
+
+    #btn-hamburguer {
+        background-color: #226015;
+        border: 4px double black;
+        border-radius: 10px;
+        padding: .4rem .4rem 0 .4rem;
+        top: 0;
+        left: 0;
+    }
+
+    #main-projects--container, #main-certificate--container {
+        padding-left: 0 !important;
+    }
+
+    /*#btn-hamburguer::after {
+        content: '';
+        background-color: white;
+        border: 4px double black;
+        border-radius: 10px;
+        width: 100%;
+        position: absolute;
+        width: 95vw;
+        height: 100%;
+    }*/
+
+    .nav-btn.nav-close-btn {
+        position: relative;
+        width: fit-content;
+        margin-left: auto;
+        transform: translateX(1rem);
+        padding: 5px 5px 0 0;
+    }
+
+    .nav-btn.nav-close-btn > svg  {
+        background-color: #ff3030;
+        border-radius: 50%;
+        border: 2px solid black;
+    }
+
+    header nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        flex-direction: column;    
+        gap: .5rem;
+        transition: all ease 1s;
+        transform: translateX(-150vw);
+        background-color: #464f43;
+        border: 4px double black;
+        width: inherit;
+        padding: 0 1rem 1rem 1rem;
+        z-index: 3;
+    }
+
+    header nav a {
+        width: 100%;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .ajustaTop-responsive{
+        margin-top: -1rem;
+    }
+
+    header .responsive_nav {
+        transform: none;
+    }
+
+    .responsive_nav-opacityUm {
+        opacity: 1;
+    }
+
+    .responsive_nav-opacityZero {
+        opacity: 0;
+    }
+}

@@ -20,7 +20,7 @@
 }
 
 .main-render--container > section > div > video {
-  border: 4px double black;
+  border: 4px double #226015;
   box-sizing: content-box !important;
   height: max-content !important;
   width: 25% !important;
@@ -29,7 +29,7 @@
 }
 
 .-bgCian {
-  background-color: rgb(0, 204, 255);
+  background-color: var(--main-color);
 }
 
 .-bgWhite{
@@ -46,6 +46,6 @@
   padding: .2rem;
   font-size: .8rem;
   border-radius: 10px;
-  background-color: white;
+  background-color: #64ff1e;
   cursor: pointer;
 }
