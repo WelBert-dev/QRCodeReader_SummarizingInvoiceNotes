@@ -1,0 +1,128 @@
+
+- Backend (API): 
+    - Linguagem C;
+    - API Rest: Mongoose.c (webui-rest);
+        - Mongoose é uma biblioteca/famework (Embedded Web Server) para 
+        desenvolvimento web (HTTP) utilizado em microcontroladores.
+
+        - O que é uma biblioteca/framework/api?
+            Ambos os termos envolvem conceitos bem parecidos com algumas 
+            pequenas diferenças sendo elas:
+
+            - Biblioteca: Códigos prontos compartilhados entre aplicações.
+
+            - Framework: Conjunto de códigos e funcionalidades prontas,
+            a diferença é que um Framework é "algo maior", são tantas 
+            funcionalidades que as vezes até o ambiente de desenvolvimento 
+            é algo personalizado.
+                - Frameworks geralmente utilizam várias bibliotecas também
+                nas suas implementações.
+
+            - API: é um conceito "Application Programming Interface" traduz
+            para "Interface de Programação de Aplicação" é exatamente isso,
+            uma interface/fachada que abstrai o complexo e por meio dela 
+            consultamos/requisitamos funcionalidades.
+            Esse conceito é aplicável a vários contextos de programação, 
+            Não apenas "API Rest" que é o mais comumente falado, como também
+            podemos referenciar essas bibliotecas e etc como uma forma de "API"
+            como por exemplo a API de Data e Hora nas linguagens de programação,
+            a dieferença é a forma como acessamos, uma por meio das chamadas dos
+            métodos (API de Data&Hora do Java) e outra por meio de requisições 
+            HTTP (Como APIS Rest) GET, POST, PUT, DELETE.
+
+        - O que é Rest?   
+            REST ou RESTFull são conceitos relacionados a semântica do protocolo 
+            HTTP, ou seja, são padrões e boas práticas relacionados ao uso dos 
+            métodos e respostas HTTP, com objetivo de padronizar ainda mais 
+            essa comunicação ajudando assim aos desenvolvedores a se entenderem
+            entre sí (Pois ambos conseguem identificar esses padrões) melhorando
+            assim na manutenção e trocas de desenvolvedores.
+            Ou seja, um conjunto de restrições a nível de arquitetura de software.
+
+        - Métodos HTTP Básico:
+            - GET: 
+            - POST:
+            - PUT:
+            - DELETE:
+          
+
+Backend (Generating QRCode):
+    - Biblioteca para gerar o QRCode: 
+        $ sudo apt-get install libqrencode-dev
+
+    - Biblioteca para converter a Matriz gerada com o qrencode em .png:
+        $ sudo apt-get install libpng-dev (default no ubuntu)
+
+    - Após instalar as dependências anteriores, basta utilizar o include 
+    no código em c e chamar as funcionalidades.
+
+    - Vantagens de se utilizar o Ubuntu/Gnu Linux para desenvolver:
+        Por padrão a linguagem c não possui um gerenciador de dependencias,
+        ou seja, quando precisamos utilizar códigos terceiros que não são
+        da API padrão do c, é necessário instalar esses pacotes e configurar
+        manualmente.
+
+        Solução: Pesquisando eu descobri que existe o `conan` como alternativa
+        para gerenciar as dependencias.
+
+        MELHOR AINDA: Podemos instalar essas dependencias via terminal com o `apt`
+        pois grande parte das dependencias do Linux é feito na linguagem C, logo
+        grande parte das bibliotecas utilizadas para programar em C estão no 
+        repositório padrão Linux!
+        - A unica configuração necessária para este cenário é informar ao compilador
+        gcc quais são as dependencias utilizadas na hora de compilar com:
+
+            $ gcc -o main hello.c -lqrencode -lpng 
+
+        - Ou configurando o arquivo ./.vscode/task.json e adicionando esses args!
+
+
+    - Não reinventar a roda:
+        Como mencionado anteriormente utilizamos o Ubuntu para desenvolver, e
+        instalamos as bibliotecas mencionadas a cima para desenvolver nossa 
+        própria lógica na geração do QR Code, mas se existe biblioteca provavelmente
+        existe um programa especializado que utiliza ela, ou seja, já existe uma 
+        solução para esse problema pronta, então não precisamos perder tempo tentando
+        re-inventar a roda e podemos focar nosso tempo em problemas que ainda não 
+        possuem soluções criadas, ai está a magia do Open Source e do Linux!
+
+        Os comandos utilizados no shell bash (terminal) são programas que executamos
+        e passamos parâmetros para alterar/configurar o comportamento esperado deles.
+        O Ideal GNU/Linux é que os programas devem fazer apenas uma tarefa, porém da
+        melhor maneira possivel.
+
+        Ai que está a magia da coisa, podemos combinar o processamento/resultado das
+        execuções de vários programas (cada um com sua especialidade, ou seja, cada um 
+        desempenhando bem alguma tarefa em particular) e de maneira integrada, jogamos 
+        a saída de um na entrada de outro, gerando algum processamento inteligente com 
+        essa junção de programas.
+
+        Dito isto, podemos simplismente executar o programa especializado no Bash ou 
+        também utiliza-lo em nosso programa da seguinte forma:
+
+            $ sudo apt install qrencode
+
+            $ qrencode "https://welbert-dev.github.io/firstPortifolioGithubPages-2022/#/certificates" -t UTF8
+            $ qrencode "https://www.instagram.com/lunatic_bertelli/" -t ANSIUTF8
+            $ qrencode "https://www.linkedin.com/in/wellison-bertelli-2191ba204" -t ASCII
+
+            invertendo:
+            $ qrencode "https://www.linkedin.com/in/wellison-bertelli-2191ba204" -t UTF8i
+
+            $ qrencode "https://welbert-dev.github.io/firstPortifolioGithubPages-2022/#/certificates" -t png -o ~/Documentos/github/QRCodeReader_SummarizingInvoiceNotes/generatedQRCodeWithLibqrencode/teste.png
+            $ feh ~/Documentos/github/QRCodeReader_SummarizingInvoiceNotes/generatedQRCodeWithLibqrencode/teste.png
+
+        Integrando o programa qrencode no nosso código:
+            Caso queiara utilizar essa funcionalidade em algum programa em c, 
+            basta utilizar a função system() que nos possibilita executar 
+            outros programas em segundo plano no nosso código:
+
+                system("qrencode 'https://welbert-dev.github.io/firstPortifolioGithubPages-2022/#/certificates' -t UTF8");
+
+
+
+
+
+
+
+
