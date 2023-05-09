@@ -120,6 +120,19 @@ Backend (Generating QRCode):
                 system("qrencode 'https://welbert-dev.github.io/firstPortifolioGithubPages-2022/#/certificates' -t UTF8");
 
 
+Frontend: Apresentação web app
+    - ReactJs: Framework javascript para desenvolvimento camada de apresentação Web.
+
+    - Biblioteca para ler QRCode: react-qr-reader
+        $ npm i react-qr-reader
+
+    - Biblioteca de Roteamento: react-router-dom v6
+        $ npm i react-router-dom
+    
+    - Biblioteca de Icons: react-Icons
+        $ npm i react-icons
+
+
 
 
 

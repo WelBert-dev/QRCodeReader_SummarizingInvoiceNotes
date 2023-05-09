@@ -6,7 +6,7 @@ CFLAGS += -DMG_ENABLE_MBEDTLS=1 -lmbedtls -lmbedcrypto -lmbedx509
 endif
 
 ifeq "$(SSL)" "OPENSSL"
-CFLAGS += -DMG_ENABLE_OPENSSL=1 -lssl -lcrypto
+CFLAGS += -DMG_ENABLE_OPENSSL=1 -lssl -lcrypto -lcjson
 endif
 
 all: $(PROG)

@@ -11,7 +11,9 @@
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}",
                 "-lqrencode",
-                "-lpng"
+                "-lpng",
+                "-lcjson",
+                "-lmongoose"
             ],
             "options": {
                 "cwd": "${fileDirname}"
