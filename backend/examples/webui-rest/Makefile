@@ -6,7 +6,7 @@ CFLAGS += -DMG_ENABLE_MBEDTLS=1 -lmbedtls -lmbedcrypto -lmbedx509
 endif
 
 ifeq "$(SSL)" "OPENSSL"
-CFLAGS += -DMG_ENABLE_OPENSSL=1 -lssl -lcrypto -lcjson
+CFLAGS += -DMG_ENABLE_OPENSSL=1 -lssl -lcrypto
 endif
 
 all: $(PROG)
@@ -14,7 +14,7 @@ all: $(PROG)
 
 
 $(PROG): main.c
-	$(CC) ../../mongoose.c -I../.. -W -Wall $(CFLAGS) $(EXTRA_CFLAGS) -o $(PROG) main.c
+	$(CC) ../../mongoose.c -I../.. -W -Wall $(CFLAGS) $(EXTRA_CFLAGS) -o $(PROG) main.c -lpng 
 
 clean:
 	rm -rf $(PROG) *.o *.dSYM *.gcov *.gcno *.gcda *.obj *.exe *.ilk *.pdb

@@ -13,7 +13,11 @@
                 "-lqrencode",
                 "-lpng",
                 "-lcjson",
-                "-lmongoose"
+                "-lmongoose",
+                "-lrt",
+                "-fsanitize=address",
+                "-fsanitize=undefined"
+                
             ],
             "options": {
                 "cwd": "${fileDirname}"

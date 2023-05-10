@@ -1,21 +1,16 @@
-// Copyright (c) 2022 Cesanta Software Limited
-// All rights reserved
-//
-// REST basics example
-// It implements the following endpoints:
-//    /api/f1 - respond with a simple mock result
-//    /api/sum - respond with the result of adding two numbers
-//    any other URI serves static files from s_root_dir
-// Results are JSON strings
-
 #include "mongoose.h"
 #include "/home/welbert/Documentos/github/QRCodeReader_SummarizingInvoiceNotes/backend/examples/webui-rest/cJSON/cJSON.h"
 #include "/home/welbert/Documentos/github/QRCodeReader_SummarizingInvoiceNotes/backend/examples/webui-rest/cJSON/cJSON.c"
-#include "/home/welbert/Documentos/github/QRCodeReader_SummarizingInvoiceNotes/backend/examples/webui-rest/stb/stb_image.h"
 
 #include <qrencode.h>
 #include <png.h>
 #include <string.h>
+#include <regex.h>
+
+#ifndef CLOCK_REALTIME
+#define CLOCK_REALTIME 0
+#endif
+
 #include <time.h>
 
 static const char *s_http_addr = "http://localhost:8000";  // HTTP port
@@ -25,7 +20,7 @@ static void generate_qrcode(const char* json_str, const char* filename) {
     // Formatar o comando para gerar o QR code
     printf("Antes de executar o comando: %s\n", json_str);
     char command[4096];
-    snprintf(command, 4096, "qrencode -o %s \"%s\"", filename, json_str);
+    snprintf(command, 4096, "qrencode -o %s.png \"%s\"", filename, json_str);
     printf("DEPOIS de executar o comando: %s\n", json_str);
 
     // Executar o comando no terminal e capturar a saída
@@ -37,6 +32,31 @@ static void generate_qrcode(const char* json_str, const char* filename) {
     printf("DEPOIS DE ABRIR ARQUIVO PARA LEITURA: %s\n", json_str);
     pclose(fp);
     printf("DEPOIS DE DAR CLOSE: %s\n", json_str);
+}
+
+// Retorna o tipo MIME do arquivo de caminho 'path'
+// Retorna NULL se o tipo MIME não for conhecido
+static const char *get_mime_type(const char *path) {
+  const char *ext = strrchr(path, '.');
+  if (!ext) {
+    return NULL;
+  }
+  if (strcmp(ext, ".html") == 0 || strcmp(ext, ".htm") == 0) {
+    return "text/html";
+  }
+  if (strcmp(ext, ".css") == 0) {
+    return "text/css";
+  }
+  if (strcmp(ext, ".js") == 0) {
+    return "application/javascript";
+  }
+  if (strcmp(ext, ".png") == 0) {
+    return "image/png";
+  }
+  if (strcmp(ext, ".jpg") == 0 || strcmp(ext, ".jpeg") == 0) {
+    return "image/jpeg";
+  }
+  return NULL;
 }
 
 static void fn(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
@@ -71,7 +91,7 @@ static void fn(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
 
       // Extrai o valor da chave "msg"
       cJSON *msg = cJSON_GetObjectItemCaseSensitive(root, "msg");
-      char *msg_str = cJSON_PrintUnformatted(msg);
+      char *msg_str = cJSON_GetStringValue(msg);
       printf("Valor da chave 'msg': %s\n", msg_str);
 
       if (msg == NULL || !cJSON_IsString(msg)) {
@@ -86,77 +106,65 @@ static void fn(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
       }
 
       // Libera a memória alocada pela cJSON
-      cJSON_Delete(root);
+      // cJSON_Delete(root);
 
       // TUDO CERTO, Faz a conversão string to QRCode PNG
 
       // Gerar o QR code a partir da string JSON
-      generate_qrcode(msg_str, "output.png");
-    
-      // // Abrir o arquivo de imagem para leitura (modo binário)
-      // FILE *fp = fopen("output.png", "rb");
-      // if (fp != NULL) {
-      //   printf("%s", "FP NÂO È NULL\n");
-      //   // Obter o tamanho do arquivo
-      //   fseek(fp, 0L, SEEK_END);
-      //   long int file_size = ftell(fp);
-      //   fseek(fp, 0L, SEEK_SET);
+      printf("MSG STRING APÒS CONCAT: %s\n", msg_str);
 
-      //   // Alocar um buffer para a imagem
-      //   char *buf = (char *)malloc(file_size);
-      //   if (buf == NULL) {
-      //     // mg_http_send_error(c, 500, "Internal Server Error", "");
-      //     mg_http_reply(c, 500, "Internal Server Error", "");
-      //     fclose(fp);
-      //     return;
-      //   }
+      // Primeiro retira os caracteres especiais do link para salvar a imagem com esse nome:
+      char *urlBefore = malloc(strlen(msg_str) + 1); // alocar memória para a string resultante
+      strcpy(urlBefore, msg_str); // copiar a string original para url
 
-      //   // Ler a imagem no buffer
-      //   size_t bytes_read = fread(buf, 1, file_size, fp);
-      //   if (bytes_read != file_size) {
-      //     // mg_http_send_error(c, 500, "Internal Server Error", "");
+      regex_t regex;
+      regmatch_t pmatch[1];
+      
+      if (regcomp(&regex, "/", REG_EXTENDED) != 0) {
+          printf("Erro na compilacao da expressao regular\n");
+          return 1;
+      }
+      
+      char *output = (char*) malloc(strlen(urlBefore));
+      int output_pos = 0;
+      int input_pos = 0;
+      
+      while (regexec(&regex, urlBefore + input_pos, 1, pmatch, 0) == 0) {
+          int match_start = pmatch[0].rm_so;
+          int match_end = pmatch[0].rm_eo;
+          int match_len = match_end - match_start;
+          strncpy(output + output_pos, urlBefore + input_pos, match_start);
+          output_pos += match_start;
+          input_pos += match_end;
+      }
+      
+      strcpy(output + output_pos, urlBefore + input_pos);
+      printf("Input: %s\nOutput: %s\n", urlBefore, output);
 
-      //     mg_http_reply(c, 500, "Internal Server Error", "");
+      generate_qrcode(msg_str, output);
 
-      //     free(buf);
-      //     fclose(fp);
-      //     return;
-      //   }
-      //   // Printa buffer para ver se esta correto (em hexadecimal) e depois verificamos o hexa da imagem
-      //   for (int i = 0; i < bytes_read; i++) {
-      //     printf("%02x", (unsigned char) buf[i]);
-      //   }
+      int width, height;
+      char pathTest[1024];
+      snprintf(pathTest, sizeof(pathTest), "%s%s.png", "/home/welbert/Documentos/github/QRCodeReader_SummarizingInvoiceNotes/backend/examples/webui-rest/", output);
+      printf("FILE PATH: %s\n", pathTest);
 
-      //   // Enviar a imagem como corpo da resposta HTTP
-      //   printf("%s", "\nANTES DO RESPONSEEEEE");
+      cJSON *json_response = cJSON_CreateObject();
+      cJSON_AddStringToObject(json_response, "path", pathTest);
 
-      //   char content_type[] = "Content-Type: image/png\r\n";
-      //   char access_control[] = "Access-Control-Allow-Origin: *\r\nAccess-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS\r\n";
-      //   char content_length[64];
-      //   snprintf(content_length, sizeof(content_length), "Content-Length: %ld\r\n", bytes_read);
-        
-      //   mg_http_reply(c, 200, content_type, access_control, content_length, buf, bytes_read);
+      // converter o objeto JSON em uma string
+      char *json_response_str = cJSON_Print(json_response);
+      cJSON_Delete(json_response);
 
-      // } else {
-      //   // Tratar erro de abertura de arquivo
-      // }
+      mg_http_reply(c, 
+                    200, 
+                    "Content-Type: application/json\r\nAccess-Control-Allow-Origin: *\r\nAccess-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS\r\n",
+                    json_response_str);
 
-    int width, height, channels;
-    unsigned char* image_data = stbi_load("output.png", &width, &height, &channels, 0);
+      free(json_response_str);
 
-    // Verifica se a imagem foi carregada corretamente
-    if (image_data == NULL) {
-        printf("Erro ao carregar a imagem\n");
-    }
+      free(output);
 
-    // Faça algo com o buffer de imagem aqui
-    printf("BUFFER GERADO: %s\n", " ");
-    for (int i = 0; i < width * height * channels; i++) {
-      printf("%02x", image_data[i]);
-    }
-
-    // Libera a memória usada pelo buffer
-    stbi_image_free(image_data);
+      regfree(&regex);
 
     } else {
       struct mg_http_serve_opts opts = {.root_dir = s_root_dir};
