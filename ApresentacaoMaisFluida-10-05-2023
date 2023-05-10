@@ -1,26 +1,63 @@
-Boa noite meus consagrados, venho compartilhar mais conhecimento do mundo da programação para vocês! Rsrs viva o open source e a comunidade GNU, sem dúvidas quem é de tecnologia DEVE conhecer pois nos ajuda muito a desenvolver e a configurar o ambiente sem grandes problemas. 
-Deixando as ressalvas de lado hoje venho compartilhar meu trabalho de conclusão do primeiro semestre da disciplina de "Programação para computadores" com a linguagem pai C.
-Optei por desenvolver uma solução ao envolto de gerações e leituras de QRCodes pois achei um tema bem diferenciado e atiçou meu lado criativo e curioso pois eu já gosto bastante de criptografia (pretendo estudar sobre blockchain no futuro) e então fui na caçada da solução!
-QR Codes são imagens 2D de matrizes binárias,
-formadas por pontos brancos e pretos que representam a informação, não apenas de URL's como qualquer texto ou objetos.
-A lógica inicial é sempre quebrar o problemão em pequenos problemas, e ir ticando cada um deles, ou seja, a primeira coisa é ir atrás de uma biblioteca especializada para trabalhar com gerações de QRCode na linguagem C.
-Aí morava o problema, devemos sim valorizar a linguagem pois ela é a base de outras mas a verdade é que não possuem muitas documentações ou problemas resolvidos com ela em português Brasil, os problemas que ela se propõe é mais para otimizações com ganhos de performance, como desenvolver drivers, sistemas operacionais ou sistemas que iram rodar em hardwares simples como controladores e etc pois esse é o propósito do C.
-Não foi a melhor escolha de linguagem para resolução do nosso problema mas como é regra ter que utilizar ela, não desisti fácil e fui atrás!
-Após algum esforço encontrei uma biblioteca especializada em trabalhar com QRCode, porém o C não ajuda muito por não possuir gerenciador de dependências na sua instalação padrão, então novamente temos que perder tempo configurando ambiente, pois foi grande parte isso.
-Existe um gerenciador de dependências muito conhecido no mundo C sendo ele o "Conan", porém como um grande entusiata GNU que eu sou descobri que essa biblioteca está no repósito padrão do Ubuntu e muitos outros sistemas unix like, pois grande parte dos programas são escritos em C, ou seja, temos grande parte das dependências da linguagem no repositório padrão pois grande parte da biblioteca Linux é escrita em C então podemos simplesmente instalar ela via apt pelo terminal.
+Boa noite meus consagrados, venho compartilhar mais conhecimento do mundo da 
+programação para vocês! Rsrs viva o open source e a comunidade GNU, sem dúvidas 
+quem é de tecnologia DEVE conhecer pois nos ajuda muito a desenvolver e a 
+configurar o ambiente sem grandes problemas.
 
-$ sudo apt-get install libqrencode
+Deixando as ressalvas de lado hoje venho compartilhar meu trabalho de conclusão 
+do primeiro semestre da disciplina de "Programação para computadores" com a 
+linguagem pai C.
 
-Pronto, agora basta realizar os includes e utilizar as funcionalidades prontas para resolver nosso problema, NÃO CALMA ainda pode melhorar, se existe biblioteca existe algum programa pronto especializado nesse problema, e melhor ainda DISPONÍVEL NO REPOSITÓRIO, então basta instalarmos e gerarmos o QRCode tudo via terminal.
+Optei por desenvolver uma solução ao envolto de gerações e leituras de QRCodes 
+pois achei um tema bem diferenciado e atiçou meu lado criativo e curioso pois eu 
+já gosto bastante de criptografia (pretendo estudar sobre blockchain no futuro) 
+e então fui na caçada da solução!
 
-$ sudo apt install qrencode
+QR Codes são imagens 2D de matrizes binárias, formadas por pontos brancos e pretos 
+que representam a informação, não apenas de URL's como qualquer texto ou objetos.
+A lógica inicial é sempre quebrar o problemão em pequenos problemas, e ir ticando
+cada um deles, ou seja, a primeira coisa é ir atrás de uma biblioteca especializada
+para trabalhar com gerações de QRCode na linguagem C.
 
-Antes de resolver o problema assim eu ainda quis desenvolver na unha utilizando a biblioteca e até foi possível gerar, mas sempre é melhor delegar as responsabilidades para quem é especialista e assim evitamos perder tempo com problemas já resolvidos, esse é o ideial GNU Linux que eu mais gosto por isso todos que desenvolvem deve dar uma chance e discartar a janela quebrada rsrs...
+Aí morava o problema, devemos sim valorizar a linguagem pois ela é a base de outras
+mas a verdade é que não possuem muitas documentações ou problemas resolvidos com ela
+em português Brasil, os problemas que ela se propõe é mais para otimizações com
+ganhos de performance, como desenvolver drivers, sistemas operacionais ou sistemas
+que iram rodar em hardwares simples como controladores e etc pois esse é o propósito
+do C.
+
+Não foi a melhor escolha de linguagem para resolução do nosso problema mas como é
+regra ter que utilizar ela, não desisti fácil e fui atrás! Após algum esforço
+encontrei uma biblioteca especializada em trabalhar com QRCode, porém o C não
+ajuda muito por não possuir gerenciador de dependências na sua instalação padrão,
+então novamente temos que perder tempo configurando ambiente, pois grande parte do
+processo foi isso, pouco desenvolvimento útil e muita configuração de ambiente.
+
+Existe um gerenciador de dependências muito conhecido no mundo C sendo ele o "Conan",
+porém como um grande entusiata GNU que eu sou descobri que essa biblioteca está no
+repósito padrão do Ubuntu e muitos outros sistemas unix like, pois grande parte
+dos programas são escritos em C, ou seja, temos grande parte das dependências da
+linguagem no repositório padrão pois grande parte da biblioteca Linux é escrita
+em C então podemos simplesmente instalar ela via apt pelo terminal.
+
+    $ sudo apt-get install libqrencode
+
+Pronto, agora basta realizar os includes e utilizar as funcionalidades prontas
+para resolver nosso problema, NÃO CALMA ainda pode melhorar, se existe biblioteca
+existe algum programa pronto especializado nesse problema, e melhor ainda DISPONÍVEL
+NO REPOSITÓRIO, então basta instalarmos e gerarmos o QRCode tudo via terminal.
+
+    $ sudo apt install qrencode
+
+Antes de resolver o problema assim eu ainda quis desenvolver na unha utilizando a
+biblioteca e até foi possível gerar, mas sempre é melhor delegar as responsabilidades
+para quem é especialista e assim evitamos perder tempo com problemas já resolvidos,
+esse é o ideial GNU Linux que eu mais gosto por isso todos que desenvolvem deve dar
+uma chance e descartar a janela quebrada (ruindows) rsrs...
 
 Hello Word da biblioteca qrencode:
 
-  #include <stdio.h> 
-  #include <stdlib.h> 
+  #include <stdio.h>
+  #include <stdlib.h>
   #include <qrencode.h> 
 
   
@@ -47,145 +84,408 @@ Hello Word da biblioteca qrencode:
      return 0; 
   }
 
-Com esse código já é possível gerar um QRCode partir de uma string e a saída é impressa no console.
+Com esse código já é possível gerar um QRCode partir de uma string e a saída é
+impressa no console.
 
-Não satisfeito eu fui além e resolvi converter a matriz 2d gerada (QR Code) e gerar o output como PNG (Imagem), e para isso basta evitar recriar a roda novamente e instalar uma biblioteca especializada para trabalhar com PNG.
+Não satisfeito eu fui além e resolvi converter a matriz 2d gerada (QR Code) e
+gerar o output como PNG (Imagem), e para isso basta evitar recriar a roda
+novamente e instalar uma biblioteca especializada para trabalhar com PNG.
 
-$ sudo apt-install libpng
+    $ sudo apt-install libpng
 
-O código é bem simples, o mesmo que o anterior porém ao invés de imprimir a matriz no console, utilizamos as chamadas na biblioteca PNG e ela resolve para nós:
+O código é bem simples, o mesmo que o anterior porém ao invés de imprimir a matriz
+no console, utilizamos as chamadas na biblioteca PNG e ela resolve para nós:
 
- #include <stdio.h> 
- #include <stdlib.h> 
- #include <qrencode.h> 
- #include <png.h> 
-  
- void write_png_file(char* filename, int width, int height, unsigned char* image_data) { 
-     FILE *fp; 
-     png_structp png_ptr = NULL; 
-     png_infop info_ptr = NULL; 
-     png_bytep row = NULL; 
-  
-     fp = fopen(filename, "wb"); 
-     if (!fp) { 
-         printf("Error opening file %s for writing.\n", filename); 
-         return; 
-     } 
-  
-     // Initialize PNG write structure 
-     png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL); 
-     if (png_ptr == NULL) { 
-         printf("Error initializing PNG write structure.\n"); 
-         fclose(fp); 
-         return; 
-     } 
-  
-     // Initialize PNG info structure 
-     info_ptr = png_create_info_struct(png_ptr); 
-     if (info_ptr == NULL) { 
-         printf("Error initializing PNG info structure.\n"); 
-         png_destroy_write_struct(&png_ptr, (png_infopp)NULL); 
-         fclose(fp); 
-         return; 
-     } 
-  
-     // Set error handling 
-     if (setjmp(png_jmpbuf(png_ptr))) { 
-         printf("Error during PNG write.\n"); 
-         png_destroy_write_struct(&png_ptr, &info_ptr); 
-         fclose(fp); 
-         return; 
-     } 
-  
-     // Set PNG write options 
-     png_set_IHDR(png_ptr, info_ptr, width, height, 
-                  8, PNG_COLOR_TYPE_GRAY, PNG_INTERLACE_NONE, 
-                  PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT); 
-  
-     // Write header information 
-     png_init_io(png_ptr, fp); 
-     png_write_info(png_ptr, info_ptr); 
-  
-     // Write image data 
-     int i; 
-     for (i = 0; i < height; i++) { 
-         row = image_data + i * width; 
-         png_write_row(png_ptr, row); 
-     } 
-  
-     // Finalize write 
-     png_write_end(png_ptr, NULL); 
-  
-     // Clean up 
-     png_destroy_write_struct(&png_ptr, &info_ptr); 
-     fclose(fp); 
- } 
-  
-  
- int main() { 
-     // Define a mensagem a ser codificada no QR code 
-     char* message = "hello word!"; 
-  
-     QRcode* qrcode = QRcode_encodeString(message, 0, QR_ECLEVEL_M, QR_MODE_8, 1); 
-  
-     // Allocate buffer for image data 
-     unsigned char* image_data = (unsigned char*)malloc(qrcode->width * qrcode->width * sizeof(unsigned char)); 
-  
-     // Convert QRcode data to grayscale image data 
-     int i, j; 
-     for (i = 0; i < qrcode->width; i++) { 
-         for (j = 0; j < qrcode->width; j++) { 
-             image_data[i*qrcode->width+j] = qrcode->data[i*qrcode->width+j] ? 0 : 255; 
-         } 
-     } 
-  
-     // Write image data to file 
-     write_png_file("hello.png", qrcode->width, qrcode->width, image_data); 
-  
-     // Clean up 
-     QRcode_free(qrcode); 
-     free(image_data); 
-  
-     return 0; 
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <qrencode.h>
+ #include <png.h>
+
+ void write_png_file(char* filename, int width, int height, unsigned char* image_data) {
+     FILE *fp;
+     png_structp png_ptr = NULL;
+     png_infop info_ptr = NULL;
+     png_bytep row = NULL;
+
+     fp = fopen(filename, "wb");
+     if (!fp) {
+         printf("Error opening file %s for writing.\n", filename);
+         return;
+     }
+
+     // Initialize PNG write structure
+     png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+     if (png_ptr == NULL) {
+         printf("Error initializing PNG write structure.\n");
+         fclose(fp);
+         return;
+     }
+
+     // Initialize PNG info structure
+     info_ptr = png_create_info_struct(png_ptr);
+     if (info_ptr == NULL) {
+         printf("Error initializing PNG info structure.\n");
+         png_destroy_write_struct(&png_ptr, (png_infopp)NULL);
+         fclose(fp);
+         return;
+     }
+
+     // Set error handling
+     if (setjmp(png_jmpbuf(png_ptr))) {
+         printf("Error during PNG write.\n");
+         png_destroy_write_struct(&png_ptr, &info_ptr);
+         fclose(fp);
+         return;
+     }
+
+     // Set PNG write options
+     png_set_IHDR(png_ptr, info_ptr, width, height,
+                  8, PNG_COLOR_TYPE_GRAY, PNG_INTERLACE_NONE,
+                  PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+
+     // Write header information
+     png_init_io(png_ptr, fp);
+     png_write_info(png_ptr, info_ptr);
+
+     // Write image data
+     int i;
+     for (i = 0; i < height; i++) {
+         row = image_data + i * width;
+         png_write_row(png_ptr, row);
+     }
+
+     // Finalize write
+     png_write_end(png_ptr, NULL);
+
+     // Clean up
+     png_destroy_write_struct(&png_ptr, &info_ptr);
+     fclose(fp);
  }
 
-Mas como dito, o código é bem simples de poucas linhas sem nenhum tratamento de erros e sem pensar em sobrecargas de chamadas então para isso no código final optei por utilizar a execução do comando bash na própria API REST com uso do system() para execução de programas no segundo plano em tempo de execução (runtime) que é o próximo tópico.
+
+ int main() {
+     // Define a mensagem a ser codificada no QR code
+     char* message = "hello word!";
+
+     QRcode* qrcode = QRcode_encodeString(message, 0, QR_ECLEVEL_M, QR_MODE_8, 1);
+
+     // Allocate buffer for image data
+     unsigned char* image_data = (unsigned char*)malloc(qrcode->width * qrcode->width * sizeof(unsigned char));
+
+     // Convert QRcode data to grayscale image data
+     int i, j;
+     for (i = 0; i < qrcode->width; i++) {
+         for (j = 0; j < qrcode->width; j++) {
+             image_data[i*qrcode->width+j] = qrcode->data[i*qrcode->width+j] ? 0 : 255;
+         }
+     }
+
+     // Write image data to file
+     write_png_file("hello.png", qrcode->width, qrcode->width, image_data);
+
+     // Clean up
+     QRcode_free(qrcode);
+     free(image_data);
+
+     return 0;
+ }
+
+Mas como dito, o código é bem simples de poucas linhas sem nenhum tratamento de
+erros e sem pensar em sobrecargas de chamadas então para isso no código final
+optei por utilizar a execução do comando bash na própria API REST com uso do
+system() para execução de programas no segundo plano em tempo de execução
+(runtime) que é o próximo tópico.
 
 Explorando e utilizando as gerações de QRCode pelo terminal Bash:
 
 Os parâmetros são bem simples e intuitivo.
 
-$ sudo apt install qrencode 
+    $ sudo apt install qrencode
 
-$ qrencode "https://welbert-dev.github.io/firstPortifolioGithubPages-2022/#/certificates" -t UTF8 
+    $ qrencode "https://welbert-dev.github.io/firstPortifolioGithubPages-2022/#/certificates" -t UTF8
 
-$ qrencode "https://www.instagram.com/lunatic_bertelli/" -t ANSIUTF8 
+    $ qrencode "https://www.instagram.com/lunatic_bertelli/" -t ANSIUTF8
 
-$ qrencode "https://www.linkedin.com/in/wellison-bertelli-2191ba204" -t ASCII 
+    $ qrencode "https://www.linkedin.com/in/wellison-bertelli-2191ba204" -t ASCII
 
-invertendo: $ qrencode "https://www.linkedin.com/in/wellison-bertelli-2191ba204" -t UTF8i 
+    invertendo: $ qrencode "https://www.linkedin.com/in/wellison-bertelli-2191ba204" -t UTF8i
 
-$ qrencode "https://welbert-dev.github.io/firstPortifolioGithubPages-2022/#/certificates" -t png -o ~/Documentos/github/QRCodeReader_SummarizingInvoiceNotes/generatedQRCodeWithLibqrencode/teste.png 
+    $ qrencode "https://welbert-dev.github.io/firstPortifolioGithubPages-2022/#/certificates" -t png -o ~/Documentos/github/QRCodeReader_SummarizingInvoiceNotes/generatedQRCodeWithLibqrencode/teste.png
 
-$ feh ~/Documentos/github/QRCodeReader_SummarizingInvoiceNotes/generatedQRCodeWithLibqrencode/teste.png
+    $ feh ~/Documentos/github/QRCodeReader_SummarizingInvoiceNotes/generatedQRCodeWithLibqrencode/teste.png
 
-Após conseguir gerar o QRCode, precisamos testar para ver se estão funcionando então por que não utilizar as tecnologias web (reactJs) como camada de apresentação e scanear o código QR pelo browser (navegador) rsrs?
+Após conseguir gerar o QRCode, precisamos testar para ver se estão funcionando
+então por que não utilizar as tecnologias web (reactJs) como camada de apresentação
+e scanear o código QR pelo browser (navegador) rsrs?
 
-Sempre buscando soluções prontas para nossos problemas em primeiro lugar, e como a comunidade React é bem grande e engajada foi bem fácil encontrar uma biblioteca javascript especializadas em ler QR Code:
+Sempre buscando soluções prontas para nossos problemas em primeiro lugar, e como a
+comunidade React é bem grande e engajada foi bem fácil encontrar uma biblioteca
+javascript especializadas em ler QR Code:
 
-$ npm i react-qr-reader
+    $ npm i react-qr-reader
 
-Utilizando alguns pequenos comandos podemos instalar e integrar essa biblioteca em nosso programa:
+Utilizando alguns pequenos comandos podemos instalar e integrar essa biblioteca
+em nosso programa:
 
-Código {...}
+Esqueleto básico para utilizar a biblioteca mencionada a cima, ligar a camera
+do dispositivo e possibilitar o scaneamento de códigos QRCode com decodificação
+da criptografia
 
-Pronto, já temos o gerador e o leitor de códigos QR más ainda falta o ajuste fino e perfumaria (CSS) e as ressalvas são:
+    import React, { useState } from 'react';
+    import { QrReader } from "react-qr-reader";
 
-Ler o código e armazenar em uma lista sem duplicar.
+    import './App.css';
+
+    function App() {
+
+    const Render = (props) => {
+      const [data, setData] = useState('No result');
+
+      return (
+        <div className="App">
+          <header className="App-header">
+            ...
+          </header>
+          <main>
+        <>
+          <QrReader
+            onResult={(result, error) => {
+              if (!!result) {
+                setData(result?.text);
+                console.log(result.getText())
+              }
+
+          </main>
+          <footer>
+              if (!!error) {
+                console.info(error);
+              }
+            }}
+            constraints={{facingMode:"user"}}
+            style={{ width: '100%' }}
+          />
+          <p>{data}</p>
+        </>
+      );
+    };
+
+    function App() {
+
+          </footer>
+      return (
+        <div className="main-render--container">
+          <Render />
+        </div>
+      );
+    }
+
+Pronto, já temos o gerador e o leitor de códigos QR más ainda falta o ajuste fino
+e perfumaria (CSS) e as ressalvas são:
+
+- Ler o código e armazenar em uma lista sem duplicar.
 
 Basta um javascript Vanilla e local storages para nos salvar:
 
-Código {...}
+import React, { useEffect, useState } from 'react';
+import { QrReader } from "react-qr-reader";
+
+import './App.css';
+
+function updateTable(listaLinksQRCode){
+  console.log("Entrou no update");
+
+  // Verifica se já existe a tabela listando os QRCodes lidos
+  // se existir ele reseta para atualizar a tabela toda vez que
+  // ler um QRCode válido (SEM DUPLICATAS)
+
+  if (document.getElementById("main-table--URL-QRCodeList") !== null)
+  {
+      console.log(typeof document.getElementById("main-table--URL-QRCodeList"))
+      document.getElementById("main-table--URL-QRCodeList").outerHTML = "";
+  }
+
+  // Resetou então pode re-criar a tabela:
+
+  var objTableQrCodeList = document.createElement("table");
+  objTableQrCodeList.setAttribute("id", "main-table--URL-QRCodeList");
+
+  var objTBodyQrCodeList = document.createElement("tbody");
+  objTBodyQrCodeList.setAttribute("id", "tBodyQRCodeList");
+
+  // Para cada QRCode lido cria elementos HTML manipulando
+  // o DOM com JS Vanilla:
+
+  for (let i = 0; i < listaLinksQRCode.length; i++)
+  {
+      if (i % 2 == "0") // par
+      {
+        var filhoTr = document.createElement("tr");
+        filhoTr.setAttribute("id", "trQrCode-"+(i + 1));
+
+        var filhoTdURL = document.createElement("td");
+        filhoTdURL.classList.add("-bgCian");
+
+        var filhoTdParagraph = document.createElement("p");
+        filhoTdParagraph.classList.add("-bgCian");
+        filhoTdParagraph.appendChild(document.createTextNode(listaLinksQRCode[i]));
+        filhoTdURL.appendChild(filhoTdParagraph);
+
+        var filhoTdLink = document.createElement("td");
+        filhoTdLink.classList.add("-bgCian");
+
+        var filhoTdAncor = document.createElement("a");
+        filhoTdAncor.setAttribute("target", "_blank");
+        filhoTdAncor.setAttribute("href", listaLinksQRCode[i]);
+
+        var filhoTdButton = document.createElement("button");
+        filhoTdButton.appendChild(document.createTextNode("Abrir Link"));
+        filhoTdButton.classList.add("-buttonLinkGenerated");
+
+        filhoTdAncor.appendChild(filhoTdButton);
+
+        filhoTdLink.appendChild(filhoTdAncor);
+
+      }
+      else // impar
+      {
+          var filhoTr = document.createElement("tr");
+          filhoTr.setAttribute("id", "trQrCode-"+(i + 1));
+
+          var filhoTdURL = document.createElement("td");
+          filhoTdURL.classList.add("-bgWhite");
+
+          var filhoTdParagraph = document.createElement("p");
+          filhoTdParagraph.classList.add("-bgWhite");
+          filhoTdParagraph.appendChild(document.createTextNode(listaLinksQRCode[i]));
+          filhoTdURL.appendChild(filhoTdParagraph);
+
+          var filhoTdLink = document.createElement("td");
+          filhoTdLink.classList.add("-bgWhite");
+
+          var filhoTdAncor = document.createElement("a");
+          filhoTdAncor.setAttribute("target", "_blank");
+          filhoTdAncor.setAttribute("href", listaLinksQRCode[i]);
+
+          var filhoTdButton = document.createElement("button");
+          filhoTdButton.appendChild(document.createTextNode("Abrir Link"));
+          filhoTdButton.classList.add("-buttonLinkGenerated");
+
+          filhoTdAncor.appendChild(filhoTdButton);
+
+          filhoTdLink.appendChild(filhoTdAncor);
+      }
+
+
+
+      filhoTr.appendChild(filhoTdURL);
+      filhoTr.appendChild(filhoTdLink);
+
+      objTBodyQrCodeList.appendChild(filhoTr);
+
+      objTableQrCodeList.appendChild(objTBodyQrCodeList);
+  }
+    // terminou de montar a árvore DOM, faz insere no final de uma estrutura
+    // já criada e renderizada na tela, no nosso caso a div verificada no
+    // primeiro if (main-table--URL-QRCodeList) se ela ja existia, pois é
+    // ela que está recebendo o DOM manipulado em memória.
+    
+  document.getElementById("table-URL--container").appendChild(objTableQrCodeList);
+}
+
+const Render = (props) => {
+  const [data, setData] = useState('No result');
+  const getLocalStorage = () => JSON.parse(localStorage.getItem('db_URL_QRCodeList')) ?? [];
+  const setLocalStorage = (dbUrlQRCodeList) => localStorage.setItem("db_URL_QRCodeList", JSON.stringify(dbUrlQRCodeList));
+
+  // CRUD
+
+  const readQRCodeURLStorage = () => getLocalStorage();
+
+  const deleteQRCodeURLStorage = (index) => {
+      const dbUrlQRCodeList = readQRCodeURLStorage();
+      dbUrlQRCodeList.splice(index, 1);
+      setLocalStorage(dbUrlQRCodeList);
+  }
+
+  const updateQRCodeURLStorage = (index, url) => {
+      const dbUrlQRCodeList = readQRCodeURLStorage();
+      dbUrlQRCodeList[index] = url;
+      setLocalStorage(dbUrlQRCodeList);
+  }
+
+
+  const createQRCodeURLStorage = (url) => {
+      const dbUrlQRCodeList = getLocalStorage();
+      dbUrlQRCodeList.push(url);
+      setLocalStorage(dbUrlQRCodeList);
+  }
+
+
+  const [data, setData] = useState([]);
+  useEffect(() => {
+
+    updateTable(readQRCodeURLStorage());
+    console.log("Chamou o useEffect!");
+    console.log("Data no useEffect: ");
+    console.log(data);
+
+  },[data])
+
+
+  return (
+    <>
+      <QrReader
+        onResult={(result, error) => {
+          if (!!result) {
+            setData(result?.text);
+            console.log(result.getText())
+
+            if (readQRCodeURLStorage().length == 0) {
+              createQRCodeURLStorage(result.getText());
+
+              console.log("lista localstorage: ");
+              console.log(readQRCodeURLStorage());
+
+              var newData = [];
+              newData.push(result.getText());
+              setData(newData);
+
+              console.log("Lista do data após setData: ");
+              console.log(data);
+
+            } else if (readQRCodeURLStorage().length > 0 && !readQRCodeURLStorage().find(url => url === result.getText())) {
+
+              createQRCodeURLStorage(result.getText());
+
+              var newData = [];
+              newData.concat(data);
+              console.log("Lista após concat:");
+              console.log(newData);
+              newData.push(result.getText());
+              console.log("lista após append: ");
+              console.log(newData);
+              setData(newData);
+              console.log("Lista após setData: ");
+              console.log(data);
+            }
+          }
+
+          if (!!error) {
+            console.info(error);
+            //console.info(error);
+          }
+        }}
+        constraints={{facingMode:"user"}}
+        style={{ width: '100%' }}
+      />
+      <p>{data}</p>
+      <section id="table-URL--container">
+        {/* <p>{data.map(item => <li>{item}</li>)}</p> */}
+      </section>
+
+    </>
+  );
+};
 
 Pronto, já temos a base para nosso frontend pronta então o próximo passo é integrar o frontend com o backend por meio de uma API Rest para finalmente gerar e ler códigos tudo pelo mesmo ambiente.
 
