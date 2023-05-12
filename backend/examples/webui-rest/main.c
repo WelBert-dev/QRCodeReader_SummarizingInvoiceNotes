@@ -15,9 +15,6 @@
 
 #include <curl/curl.h>
 
-#define API_KEY "AIzaSyDJ2ysDUfcerIWw16djY_THaNGRnPS39ys"
-#define UPLOAD_URL "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart"
-
 static const char *s_http_addr = "http://localhost:8000";  // HTTP port
 static const char *s_root_dir = "web_root";
 

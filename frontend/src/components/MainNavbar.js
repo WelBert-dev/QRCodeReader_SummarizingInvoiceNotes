@@ -74,7 +74,6 @@ export default function MainNavbar() {
             <nav id="navbar-container" ref={navRef} >
                 <button id="nav-close-btn" className="nav-btn nav-close-btn" onClick={showNavbar}><FaTimes /></button>
                 <a href="/">Reader</a>
-                <a href="/#/writer" onClick={() => setNavBarEmColumn(true)}>Writer</a>
             </nav>
             <button id="btn-hamburguer" className="nav-btn" onClick={showNavbar}><FaBars /></button>
         </>
