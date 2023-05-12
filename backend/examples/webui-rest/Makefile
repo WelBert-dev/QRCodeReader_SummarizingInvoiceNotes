@@ -14,7 +14,7 @@ all: $(PROG)
 
 
 $(PROG): main.c
-	$(CC) ../../mongoose.c -I../.. -W -Wall $(CFLAGS) $(EXTRA_CFLAGS) -o $(PROG) main.c -lpng 
+	$(CC) ../../mongoose.c -I../.. -W -Wall $(CFLAGS) $(EXTRA_CFLAGS) -o $(PROG) main.c -lmongoose -lpng -lcurl -lssl -lcrypto
 
 clean:
 	rm -rf $(PROG) *.o *.dSYM *.gcov *.gcno *.gcda *.obj *.exe *.ilk *.pdb

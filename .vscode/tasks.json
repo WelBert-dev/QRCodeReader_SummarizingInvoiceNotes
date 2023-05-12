@@ -7,6 +7,10 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
+                "../../mongoose.c",
+                "-I../..",
+                "-W",
+                "-Wall",
                 "${file}",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}",
@@ -16,7 +20,10 @@
                 "-lmongoose",
                 "-lrt",
                 "-fsanitize=address",
-                "-fsanitize=undefined"
+                "-fsanitize=undefined",
+                "-lcurl",
+                "-lssl",
+                "-lcrypto"
                 
             ],
             "options": {

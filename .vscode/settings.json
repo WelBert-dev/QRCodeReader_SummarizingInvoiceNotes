@@ -8,6 +8,7 @@
         "array": "c",
         "string": "c",
         "string_view": "c",
-        "stb_image.h": "c"
+        "stb_image.h": "c",
+        "curl.h": "c"
     }
 }
