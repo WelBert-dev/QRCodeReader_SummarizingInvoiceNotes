@@ -20,92 +20,60 @@ function updateTable(listaLinksQRCode){
   {
       if (i % 2 == "0") 
       { // par
-          if (i == 0)
-          {
-            var filhoTr = document.createElement("tr");
-            filhoTr.setAttribute("id", "trQrCode-"+(i + 1));
-    
-            var filhoTdURL = document.createElement("td");
-            filhoTdURL.classList.add("-bgCian");
+        var filhoTr = document.createElement("tr");
+        filhoTr.setAttribute("id", "trQrCode-"+(i + 1));
 
-            var filhoTdParagraph = document.createElement("p");
-            filhoTdParagraph.classList.add("-bgCian");
-            filhoTdParagraph.appendChild(document.createTextNode(listaLinksQRCode[i]));
-            filhoTdURL.appendChild(filhoTdParagraph);
+        var filhoTdURL = document.createElement("td");
+        filhoTdURL.classList.add("-bgCian");
+        
+        var filhoTdParagraph = document.createElement("p");
+        filhoTdParagraph.classList.add("-bgCian");
+        filhoTdParagraph.appendChild(document.createTextNode(listaLinksQRCode[i]));
+        filhoTdURL.appendChild(filhoTdParagraph);
 
-            var filhoTdLink = document.createElement("td");
-            filhoTdLink.classList.add("-bgCian");
+        var filhoTdLink = document.createElement("td");
+        filhoTdLink.classList.add("-bgCian");
 
-            var filhoTdAncor = document.createElement("a");
-            filhoTdAncor.setAttribute("target", "_blank");
-            filhoTdAncor.setAttribute("href", listaLinksQRCode[i]);
+        var filhoTdAncor = document.createElement("a");
+        filhoTdAncor.setAttribute("target", "_blank");
+        filhoTdAncor.setAttribute("href", listaLinksQRCode[i]);
 
-            var filhoTdButton = document.createElement("button");
-            filhoTdButton.appendChild(document.createTextNode("Abrir Link"));
-            filhoTdButton.classList.add("-buttonLinkGenerated");
+        var filhoTdButton = document.createElement("button");
+        filhoTdButton.appendChild(document.createTextNode("Abrir Link"));
+        filhoTdButton.classList.add("-buttonLinkGenerated");
 
-            filhoTdAncor.appendChild(filhoTdButton);
+        filhoTdAncor.appendChild(filhoTdButton);
 
-            filhoTdLink.appendChild(filhoTdAncor);
-      
-          }
-          else
-          {
-            var filhoTr = document.createElement("tr");
-            filhoTr.setAttribute("id", "trQrCode-"+(i + 1));
-    
-            var filhoTdURL = document.createElement("td");
-            filhoTdURL.classList.add("-bgCian");
-            
-            var filhoTdParagraph = document.createElement("p");
-            filhoTdParagraph.classList.add("-bgCian");
-            filhoTdParagraph.appendChild(document.createTextNode(listaLinksQRCode[i]));
-            filhoTdURL.appendChild(filhoTdParagraph);
-
-            var filhoTdLink = document.createElement("td");
-            filhoTdLink.classList.add("-bgCian");
-
-            var filhoTdAncor = document.createElement("a");
-            filhoTdAncor.setAttribute("target", "_blank");
-            filhoTdAncor.setAttribute("href", listaLinksQRCode[i]);
-
-            var filhoTdButton = document.createElement("button");
-            filhoTdButton.appendChild(document.createTextNode("Abrir Link"));
-            filhoTdButton.classList.add("-buttonLinkGenerated");
-
-            filhoTdAncor.appendChild(filhoTdButton);
-
-            filhoTdLink.appendChild(filhoTdAncor);
-          }
+        filhoTdLink.appendChild(filhoTdAncor);
       }
       else 
       { // impar 007bff azul bunitu
 
-          var filhoTr = document.createElement("tr");
-          filhoTr.setAttribute("id", "trQrCode-"+(i + 1));
-  
-          var filhoTdURL = document.createElement("td");
-          filhoTdURL.classList.add("-bgWhite");
-          
-          var filhoTdParagraph = document.createElement("p");
-          filhoTdParagraph.classList.add("-bgWhite");
-          filhoTdParagraph.appendChild(document.createTextNode(listaLinksQRCode[i]));
-          filhoTdURL.appendChild(filhoTdParagraph);
+        var filhoTr = document.createElement("tr");
+        filhoTr.setAttribute("id", "trQrCode-"+(i + 1));
 
-          var filhoTdLink = document.createElement("td");
-          filhoTdLink.classList.add("-bgWhite");
+        var filhoTdURL = document.createElement("td");
+        filhoTdURL.classList.add("-bgWhite");
+        
+        var filhoTdParagraph = document.createElement("p");
+        filhoTdParagraph.classList.add("-bgWhite");
+        filhoTdParagraph.appendChild(document.createTextNode(listaLinksQRCode[i]));
+        filhoTdURL.appendChild(filhoTdParagraph);
 
-          var filhoTdAncor = document.createElement("a");
-          filhoTdAncor.setAttribute("target", "_blank");
-          filhoTdAncor.setAttribute("href", listaLinksQRCode[i]);
+        var filhoTdLink = document.createElement("td");
+        filhoTdLink.classList.add("-bgWhite");
 
-          var filhoTdButton = document.createElement("button");
-          filhoTdButton.appendChild(document.createTextNode("Abrir Link"));
-          filhoTdButton.classList.add("-buttonLinkGenerated");
+        var filhoTdAncor = document.createElement("a");
+        filhoTdAncor.setAttribute("target", "_blank");
+        filhoTdAncor.setAttribute("href", listaLinksQRCode[i]);
 
-          filhoTdAncor.appendChild(filhoTdButton);
+        var filhoTdButton = document.createElement("button");
+        filhoTdButton.appendChild(document.createTextNode("Abrir Link"));
+        filhoTdButton.classList.add("-buttonLinkGenerated");
 
-          filhoTdLink.appendChild(filhoTdAncor);
+        filhoTdAncor.appendChild(filhoTdButton);
+
+        filhoTdLink.appendChild(filhoTdAncor);
       }
 
       filhoTr.appendChild(filhoTdURL);
