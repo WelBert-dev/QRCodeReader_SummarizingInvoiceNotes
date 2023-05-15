@@ -11,14 +11,6 @@
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}",
                 "-lqrencode",
-                // "-lpng",
-                // "-lcjson",
-                // "-lrt",
-                // // "-fsanitize=address",
-                // // "-fsanitize=undefined",
-                // "-lcurl",
-                // "-lssl",
-                // "-lcrypto"
                 
             ],
             "options": {
