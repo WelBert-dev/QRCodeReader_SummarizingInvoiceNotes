@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "qrencode.h"
+#include <locale.h>
 
 
 void printQRCode(QRcode *qrcode) {
@@ -12,6 +13,7 @@ void printQRCode(QRcode *qrcode) {
     int i, j;
     for (i = 0; i < width; i++) {
         for (j = 0; j < width; j++) {
+            printf("KANJI: %04x\n", data[i * width + j]);
             // Verifica se a posição corresponde a um quadrado de Position Detection Pattern
             int isPD = (i < 7 && j < 7) ||       // Canto superior esquerdo 7x7 Módulo
                        (i < 7 && j >= width - 7) ||      // Canto superior direito 7x7 Módulo
@@ -34,8 +36,8 @@ void printQRCode(QRcode *qrcode) {
             // Mais sobre width: A Largura vai depender e se auto dimensionar de acordo com 
             // o tamanho da informação armazenada neste QRCode em sí, o papel dela é quebrar 
             // a linha simulando um array bidimensional, dispondo a informação em formato de
-            // matriz.
-            
+            // matriz. 
+
             printf("%c", isPD ? '#' : (data[i * width + j] ? '1' : '0'));
         }
         printf("\n");
@@ -43,13 +45,18 @@ void printQRCode(QRcode *qrcode) {
 }
 
 int main() {
+    // Definir o locale para chinês (Simplificado)
+    setlocale(LC_ALL, "zh_CN.UTF-8");
+
     char string[] = "hello, world!";
-    QRcode *qrcode = QRcode_encodeString(string, 0, QR_ECLEVEL_L, QR_MODE_8, 1);
+    QRcode *qrcode = QRcode_encodeString(string, 0, QR_ECLEVEL_L, QR_MODE_KANJI, 1);
 
     // Imprime o QR code com os Position Detection Patterns
     printQRCode(qrcode);
 
     QRcode_free(qrcode);
+    // Definir o locale para chinês (Simplificado)
+    setlocale(LC_ALL, "pt_BR.UTF-8");
     
     return 0;
 }
